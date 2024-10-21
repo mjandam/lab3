@@ -22,6 +22,9 @@ public class Product {
     }
 
     public void setName(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
+        }
         this.name = name;
     }
 
@@ -30,7 +33,11 @@ public class Product {
     }
 
     public void setPrice(float price) {
-        this.price = price;
+        if (price <= 0) {
+            throw new IllegalArgumentException("Price must be positive");
+        }
+        // Zaokrąglamy cenę do dwóch miejsc po przecinku
+        this.price = Math.round(price * 100) / 100.0f;
     }
 
     @Override
